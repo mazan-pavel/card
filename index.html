@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div id="cards">
+
+
+    </div>
+    <script>
+        const card = {
+            title: 'Тайная жизнь',
+            subTitle: 'домашних животных 2',
+            cost: 50,
+            curuncy: 'руб.',
+            imageCard: 'poster.jpg',
+            typeDevice: 'bluray.png',
+            action: true,
+            rate: 4,
+            buyImage: 'buy.png'
+        }
+        function renderStar(count) {
+            let rateStar = '';
+            for (i = 1; i <= 5; i++) {
+                rateStar += (i <= count) ? '<span class="material-icons" style="color:#ffff99;">star</span>' : '<span class="material-icons">star</span>'
+            }
+            return `<div class="rate">${rateStar}</div>`;
+        }
+        function renderPrice(price, curuncy, sale = false) {
+            let priceHtml = '';
+            priceHtml += `<div>${price.toFixed(2) + curuncy}</div>`
+            priceHtml += sale == true ? `<div>${(price - (price / 100 * 10)).toFixed(2) + curuncy}</div>` : '';
+            return `<div class="price">${priceHtml}</div>`
+        }
+        const renderCard = function () {
+            let cardItem = `<div class="card">
+            <div class="device-block">
+                <img src="images/${card.typeDevice}" alt="">
+            </div>
+            <div class="poster">
+                <img src="images/${card.imageCard}" alt="" srcset="">
+            </div>
+            <div class="title">
+                <div>${card.title}</div>
+                <div>${card.subTitle}</div>
+            </div>
+            ${renderPrice(card.cost, card.curuncy, card.action)}
+            ${renderStar(card.rate)}
+            <div class="buy">
+                <a href="#"><img src="images/${card.buyImage}" alt=""></a>
+            </div>
+        </div>`
+            cards.innerHTML = cardItem;
+        }
+        renderCard();
+    </script>
+</body>
+
+</html>
